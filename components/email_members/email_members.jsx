@@ -10,6 +10,7 @@ export default class EmailMembers extends React.Component {
     static propTypes = {
         config: PropTypes.object.isRequired,
         channelId: PropTypes.string,
+        currentUserEmail: PropTypes.string.isRequired,
         actions: PropTypes.shape({
             getChannelMembersEmails: PropTypes.func.isRequired,
         }).isRequired,
@@ -17,7 +18,7 @@ export default class EmailMembers extends React.Component {
 
     handleEmailChannelMembers = () => {
         this.props.actions.getChannelMembersEmails(this.props.channelId).then((data) => {
-            window.location.href = 'mailto:' + data.data;
+            window.location.href = 'mailto:' + data.data+'?cc='+this.props.currentUserEmail;
         });
     };
 

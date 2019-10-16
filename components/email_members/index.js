@@ -8,12 +8,14 @@ import {getChannelMembersEmails} from 'mattermost-redux/actions/channels';
 import {getConfig} from 'mattermost-redux/selectors/entities/general';
 
 import EmailMembers from './email_members.jsx';
+import {getCurrentUser} from "mattermost-redux/selectors/entities/users";
 
 function mapStateToProps(state) {
     const channel = getCurrentChannel(state);
     return {
         channelId: channel ? channel.id : '',
         config: getConfig(state),
+        currentUserEmail: getCurrentUser(state).email,
     };
 }
 
